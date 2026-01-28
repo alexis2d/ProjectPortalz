@@ -44,5 +44,19 @@ namespace cowsins2D
             return null;
         }
 
+        public void RefreshPortals()
+        {
+            SetPortals();
+        }
+
+        public void ClearPortals()
+        {
+            foreach (var portal in portals)
+            {
+                portal.Destroy();
+            }
+            portals = new Portal[0];
+        }
+
     }
 }

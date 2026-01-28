@@ -43,5 +43,10 @@ namespace cowsins2D
             Debug.Log("Teleported to " + exitPortal.transform.position);
         }
 
+        public void Destroy()
+        {
+            Destroy(this.gameObject);
+        }
+
     }
 }
