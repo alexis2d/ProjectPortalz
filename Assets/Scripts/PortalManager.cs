@@ -1,4 +1,6 @@
 using UnityEngine;
+using System.Collections.Generic;
+
 
 namespace cowsins2D
 {
@@ -6,14 +8,14 @@ namespace cowsins2D
     {
         private static PortalManager instance;
         public static PortalManager Instance { get { return instance; } }
-        private Portal[] portals;
+        private List<Portal> portals = new List<Portal>();
+
 
         private void Awake()
         {
             if (instance == null)
             {
                 instance = this;
-                SetPortals();
                 DontDestroyOnLoad(gameObject);
             }
             else
@@ -22,13 +24,14 @@ namespace cowsins2D
             }
         }
 
-        private void SetPortals()
+        public List<Portal> GetPortals()
         {
-            portals = FindObjectsOfType<Portal>();
-            foreach (var portal in portals)
-            {
-                Debug.Log(portal.transform.position);
-            }
+            return portals;
+        }
+
+        public void AddPortal(Portal portal)
+        {
+            portals.Add(portal);
         }
 
         public Portal GetExitPortal(Portal entryPortal)
@@ -37,16 +40,10 @@ namespace cowsins2D
             {
                 if (portal != entryPortal)
                 {
-                    Debug.Log(portal);
                     return portal;
                 }
             }
             return null;
-        }
-
-        public void RefreshPortals()
-        {
-            SetPortals();
         }
 
         public void ClearPortals()
@@ -55,7 +52,7 @@ namespace cowsins2D
             {
                 portal.Destroy();
             }
-            portals = new Portal[0];
+            portals.Clear();
         }
 
     }

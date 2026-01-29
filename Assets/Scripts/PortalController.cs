@@ -7,7 +7,10 @@ namespace cowsins2D
     public class PortalController : MonoBehaviour
     {
         [SerializeField] private Portal portalPrefab;
+        [SerializeField] private Transform portalsParent;
+
         [SerializeField] private float creationCooldown = 1f;
+        [SerializeField] private int maxPortals = 2;
         [SerializeField] private LayerMask groundLayer;
         private UIController UIController;
         private PlayerDependencies playerDependencies;
@@ -46,11 +49,14 @@ namespace cowsins2D
 
             Vector2 screenPos = InputManager.PlayerInputs.MousePos;
             Vector2 worldPos = Camera.main.ScreenToWorldPoint(screenPos);
-            Debug.Log(worldPos);
-
             if (IsValidPosition(worldPos) == false)
             {
                 return;
+            }
+
+            if (PortalManager.Instance.GetPortals().Count >= maxPortals)
+            {
+                PortalManager.Instance.ClearPortals();
             }
             
             PlacePortal(worldPos);
@@ -58,15 +64,19 @@ namespace cowsins2D
 
         private bool IsValidPosition(Vector2 position)
         {
-            return true;
+            return Physics2D.OverlapCircle(position, 0.2f, groundLayer) == false;
         }
 
         private void PlacePortal(Vector2 position)
         {
-            Instantiate(portalPrefab, position, Quaternion.identity);
+            Portal portal = Instantiate(portalPrefab, position, Quaternion.identity);
+            portal.gameObject.SetActive(true);
+            portal.transform.SetParent(portalsParent);
+            PortalManager.Instance.AddPortal(portal);
             lastCreation = DateTime.Now;
 
             OnPortalPlaced?.Invoke();
         }
+
     }
 }
