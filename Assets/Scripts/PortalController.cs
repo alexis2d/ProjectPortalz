@@ -72,8 +72,9 @@ namespace cowsins2D
             Portal portal = Instantiate(portalPrefab, position, Quaternion.identity);
             portal.gameObject.SetActive(true);
             portal.transform.SetParent(portalsParent);
+            portal.SetCreationTime(DateTime.Now);
             PortalManager.Instance.AddPortal(portal);
-            lastCreation = DateTime.Now;
+            lastCreation = portal.GetCreationTime();
 
             OnPortalPlaced?.Invoke();
         }

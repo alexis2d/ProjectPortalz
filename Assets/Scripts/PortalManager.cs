@@ -34,6 +34,11 @@ namespace cowsins2D
             portals.Add(portal);
         }
 
+        public void RemovePortal(Portal portal)
+        {
+            portals.Remove(portal);
+        }
+
         public Portal GetExitPortal(Portal entryPortal)
         {
             foreach (var portal in portals)

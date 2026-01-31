@@ -5,16 +5,20 @@ namespace cowsins2D
 {
     public class Portal : Trigger
     {
-
-        [SerializeField]
-        private float creationCooldown = 0;
-        [SerializeField]
-        private float usageCooldown = 2f;
-        [SerializeField]
-        private float lifetime = 20f;
-        [SerializeField]
-        private float distanceBeforeDestruction = 50f;
+        [SerializeField] private float usageCooldown = 2f;
+        [SerializeField] private float lifetime = 20f;
+        [SerializeField] private float distanceBeforeDestruction = 50f;
         private DateTime lastUsage;
+        private DateTime creationTime;
+
+        private void Update()
+        {
+            if (DateTime.Now - creationTime > TimeSpan.FromSeconds(lifetime))
+            {
+                PortalManager.Instance.RemovePortal(this);
+                Destroy();
+            }
+        }
 
         public override void EnterTrigger(GameObject target)
         {
@@ -46,6 +50,16 @@ namespace cowsins2D
         public void Destroy()
         {
             Destroy(this.gameObject);
+        }
+
+        public void SetCreationTime(DateTime time)
+        {
+            creationTime = time;
+        }
+
+        public DateTime GetCreationTime()
+        {
+            return creationTime;
         }
 
     }
