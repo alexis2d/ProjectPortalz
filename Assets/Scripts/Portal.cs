@@ -11,15 +11,6 @@ namespace cowsins2D
         private DateTime lastUsage;
         private DateTime creationTime;
 
-        private void Update()
-        {
-            if (DateTime.Now - creationTime > TimeSpan.FromSeconds(lifetime))
-            {
-                PortalManager.Instance.RemovePortal(this);
-                Destroy();
-            }
-        }
-
         public override void EnterTrigger(GameObject target)
         {
             Debug.Log("Entered Portal Trigger");
@@ -28,6 +19,26 @@ namespace cowsins2D
                 Teleport(target);
             }
             base.EnterTrigger(target);
+        }
+
+        public bool RemovalWithTime()
+        {
+            if (DateTime.Now - creationTime > TimeSpan.FromSeconds(lifetime))
+            {
+                Destroy();
+                return true;
+            }
+            return false;
+        }
+
+        public bool RemovalWithDistance(Transform player)
+        {
+            if (Vector2.Distance(player.position, transform.position) > distanceBeforeDestruction)
+            {
+                Destroy();
+                return true;
+            }
+            return false;
         }
 
         private bool canTeleport(GameObject target)
@@ -42,9 +53,11 @@ namespace cowsins2D
         private void Teleport(GameObject target)
         {
             Portal exitPortal = PortalManager.Instance.GetExitPortal(this);
-            target.transform.position = exitPortal.transform.position;
-            exitPortal.lastUsage = DateTime.Now;
-            Debug.Log("Teleported to " + exitPortal.transform.position);
+            if (exitPortal != null)
+            {
+                target.transform.position = exitPortal.transform.position;
+                exitPortal.lastUsage = DateTime.Now;
+            }
         }
 
         public void Destroy()

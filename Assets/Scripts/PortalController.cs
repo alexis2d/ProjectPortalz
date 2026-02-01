@@ -1,6 +1,7 @@
 using UnityEngine;
 using UnityEngine.Events;
 using System;
+using System.Collections.Generic;
 
 namespace cowsins2D
 {
@@ -27,7 +28,24 @@ namespace cowsins2D
 
         private void Update()
         {
+            AutomaticRemoval();
             if (PlayerIsClicking() && UIController.highlightedInventorySlot == null && UIController.currentInventorySlot == null) HandlePortalPlacement();
+        }
+
+        private void AutomaticRemoval()
+        {
+            List<Portal> portalsToRemove = new List<Portal>();
+            foreach (var portal in PortalManager.Instance.GetPortals())
+            {
+                if (portal.RemovalWithTime() || portal.RemovalWithDistance(playerDependencies.gameObject.transform))
+                {
+                    portalsToRemove.Add(portal);
+                }
+            }
+            foreach (var portal in portalsToRemove)
+            {
+                PortalManager.Instance.RemovePortal(portal);
+            }
         }
 
         private bool PlayerIsClicking()
