@@ -29,7 +29,8 @@ namespace cowsins2D
         private void Update()
         {
             AutomaticRemoval();
-            if (PlayerIsClicking() && UIController.highlightedInventorySlot == null && UIController.currentInventorySlot == null) HandlePortalPlacement();
+            if (InputManager.PlayerInputs.Shoot && UIController.highlightedInventorySlot == null && UIController.currentInventorySlot == null) HandlePortalPlacement();
+            if (InputManager.PlayerInputs.Reload && UIController.highlightedInventorySlot == null && UIController.currentInventorySlot == null) HandlePortalClearing();
         }
 
         private void AutomaticRemoval()
@@ -48,14 +49,14 @@ namespace cowsins2D
             }
         }
 
-        private bool PlayerIsClicking()
-        {
-            return InputManager.PlayerInputs.Shoot;
-        }
-
         private void HandlePortalPlacement()
         {
             TryPlacePortal();
+        }
+
+        private void HandlePortalClearing()
+        {
+            PortalManager.Instance.ClearPortals();
         }
 
         public void TryPlacePortal()
