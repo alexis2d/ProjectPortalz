@@ -62386,6 +62386,11 @@ SpriteRenderer:
   m_SpriteTileMode: 0
   m_WasSpriteAssigned: 1
   m_SpriteSortPoint: 0
+--- !u!1 &1764482665 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 4483729059083163203, guid: 24d0198052b2e7947905ce135af40fca, type: 3}
+  m_PrefabInstance: {fileID: 2017071077}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1925862238
 GameObject:
   m_ObjectHideFlags: 0
@@ -62745,6 +62750,10 @@ PrefabInstance:
       propertyPath: 'initialWeapons.Array.data[0]'
       value: 
       objectReference: {fileID: 0}
+    - target: {fileID: 4483729059083163230, guid: 24d0198052b2e7947905ce135af40fca, type: 3}
+      propertyPath: m_Enabled
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 4483729059219301875, guid: 24d0198052b2e7947905ce135af40fca, type: 3}
       propertyPath: shieldUI
       value: 
@@ -62760,6 +62769,14 @@ PrefabInstance:
     - target: {fileID: 4483729059219301885, guid: 24d0198052b2e7947905ce135af40fca, type: 3}
       propertyPath: m_ReferenceResolution.y
       value: 800
+      objectReference: {fileID: 0}
+    - target: {fileID: 4483729059271055480, guid: 24d0198052b2e7947905ce135af40fca, type: 3}
+      propertyPath: m_LocalScale.x
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4483729059271055480, guid: 24d0198052b2e7947905ce135af40fca, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: -0.58
       objectReference: {fileID: 0}
     - target: {fileID: 4483729059289176239, guid: 24d0198052b2e7947905ce135af40fca, type: 3}
       propertyPath: 'm_ActiveFontFeatures.Array.data[0]'
@@ -62857,6 +62874,26 @@ PrefabInstance:
       propertyPath: 'm_ActiveFontFeatures.Array.data[0]'
       value: 1801810542
       objectReference: {fileID: 0}
+    - target: {fileID: 4483729059846995232, guid: 24d0198052b2e7947905ce135af40fca, type: 3}
+      propertyPath: m_Controller
+      value: 
+      objectReference: {fileID: -8385494704648532243, guid: 33752ede569b5c549a393ee8887363ac, type: 3}
+    - target: {fileID: 4483729059846995234, guid: 24d0198052b2e7947905ce135af40fca, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: -0.09
+      objectReference: {fileID: 0}
+    - target: {fileID: 4483729059846995235, guid: 24d0198052b2e7947905ce135af40fca, type: 3}
+      propertyPath: m_FlipX
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4483729059846995235, guid: 24d0198052b2e7947905ce135af40fca, type: 3}
+      propertyPath: m_Sprite
+      value: 
+      objectReference: {fileID: -8673244361354030188, guid: 33752ede569b5c549a393ee8887363ac, type: 3}
+    - target: {fileID: 4483729059846995235, guid: 24d0198052b2e7947905ce135af40fca, type: 3}
+      propertyPath: m_Enabled
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 4483729059850318632, guid: 24d0198052b2e7947905ce135af40fca, type: 3}
       propertyPath: 'm_ActiveFontFeatures.Array.data[0]'
       value: 1801810542
@@ -62927,7 +62964,10 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: 4483729058385598576, guid: 24d0198052b2e7947905ce135af40fca, type: 3}
       insertIndex: -1
       addedObject: {fileID: 676291826}
-    m_AddedComponents: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 4483729059083163203, guid: 24d0198052b2e7947905ce135af40fca, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 2017071097}
   m_SourcePrefab: {fileID: 100100000, guid: 24d0198052b2e7947905ce135af40fca, type: 3}
 --- !u!1 &2017071078 stripped
 GameObject:
@@ -62944,12 +62984,24 @@ MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 4483729059083163225, guid: 24d0198052b2e7947905ce135af40fca, type: 3}
   m_PrefabInstance: {fileID: 2017071077}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
+  m_GameObject: {fileID: 1764482665}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 63c46bdc1a985114e858466970bf19c0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &2017071097
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1764482665}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5eaa15f4d62dea14bbfff8de67ae3018, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::cowsins2D.AuroraAnimator
 --- !u!1001 &2034991950
 PrefabInstance:
   m_ObjectHideFlags: 0

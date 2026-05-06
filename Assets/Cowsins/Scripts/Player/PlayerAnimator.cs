@@ -12,8 +12,8 @@ namespace cowsins2D
         private Rigidbody2D rb;
         private PlayerDependencies playerDependencies;
 
-        private string currentState;
-        private Animator animator;
+        protected string currentState;
+        protected Animator animator;
 
         private void Start()
         {
@@ -121,7 +121,7 @@ namespace cowsins2D
 
         private void DieAnim() => ChangeAnimationState("Die"); 
 
-        private void ChangeAnimationState(string newState)
+        protected virtual void ChangeAnimationState(string newState)
         {
             if (currentState == newState) return;
 
