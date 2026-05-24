@@ -16,6 +16,7 @@ TagManager:
   - OneWayPlatform
   - Projectile
   - World
+  - PlayerUI
   layers:
   - Default
   - TransparentFX
@@ -35,8 +36,8 @@ TagManager:
   - PostProcessing
   - Effects
   - Player
-  - 
-  - 
+  - PlayerUI
+  - Camera
   - 
   - 
   - 
@@ -55,3 +56,4 @@ TagManager:
     locked: 0
   m_RenderingLayers:
   - Default
+  m_MigratedRenderPipelines: []
