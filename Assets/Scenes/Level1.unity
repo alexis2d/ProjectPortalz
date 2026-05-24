@@ -61892,6 +61892,29 @@ SpriteRenderer:
   m_SpriteTileMode: 0
   m_WasSpriteAssigned: 1
   m_SpriteSortPoint: 0
+--- !u!1 &1277441981 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 4483729058191661029, guid: 24d0198052b2e7947905ce135af40fca, type: 3}
+  m_PrefabInstance: {fileID: 2017071077}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &1277441984
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1277441981}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 141678713a9fdfe4db899e251f7808ce, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: '::'
+  cameraMethod: 1
+  target: {fileID: 2017071113}
+  cameraOffset: {x: 0, y: 2, z: -10}
+  boundary: {x: 0, y: 0}
+  cameraLaziness: 0.3
+  fovSmoothness: 4
 --- !u!1 &1320483412
 GameObject:
   m_ObjectHideFlags: 0
@@ -62585,6 +62608,10 @@ PrefabInstance:
       value: 19
       objectReference: {fileID: 0}
     - target: {fileID: 4483729058191661051, guid: 24d0198052b2e7947905ce135af40fca, type: 3}
+      propertyPath: m_Enabled
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4483729058191661051, guid: 24d0198052b2e7947905ce135af40fca, type: 3}
       propertyPath: cameraOffset.y
       value: 2
       objectReference: {fileID: 0}
@@ -62990,6 +63017,12 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: 4483729059083163203, guid: 24d0198052b2e7947905ce135af40fca, type: 3}
       insertIndex: -1
       addedObject: {fileID: 2017071097}
+    - targetCorrespondingSourceObject: {fileID: 4483729059083163203, guid: 24d0198052b2e7947905ce135af40fca, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 2017071114}
+    - targetCorrespondingSourceObject: {fileID: 4483729058191661029, guid: 24d0198052b2e7947905ce135af40fca, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 1277441984}
   m_SourcePrefab: {fileID: 100100000, guid: 24d0198052b2e7947905ce135af40fca, type: 3}
 --- !u!1 &2017071078 stripped
 GameObject:
@@ -63024,6 +63057,24 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5eaa15f4d62dea14bbfff8de67ae3018, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::cowsins2D.AuroraAnimator
+--- !u!4 &2017071113 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 4483729059083163207, guid: 24d0198052b2e7947905ce135af40fca, type: 3}
+  m_PrefabInstance: {fileID: 2017071077}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &2017071114
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1764482665}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d291ac2a7b138774786750cc91cd0b40, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::AuroraMainController
+  auroraCamera: {fileID: 1277441984}
 --- !u!1001 &2034991950
 PrefabInstance:
   m_ObjectHideFlags: 0

@@ -17,7 +17,7 @@ namespace cowsins2D
 
         [SerializeField, Tooltip("What object does this camera follow.")] private Transform target;
 
-        [SerializeField, Tooltip("Camera position variation")] private Vector3 cameraOffset;
+        [SerializeField, Tooltip("Camera position variation")] protected Vector3 cameraOffset;
 
         [SerializeField, Tooltip("Size of the camera vision. Once the target is outside of these boundaries, it will start following the target.")] private Vector2 boundary;
 
@@ -94,6 +94,8 @@ namespace cowsins2D
         public void CameraToSimple() => cameraMethod = CameraControllerMethod.FollowTarget;
 
         public void CameraToBoundary() => cameraMethod = CameraControllerMethod.FollowTargetWhenCloseToBounds;
+
+        public void SetCameraOffsetX(float x) => cameraOffset = new Vector3(x, cameraOffset.y, cameraOffset.z);
     }
 
 
