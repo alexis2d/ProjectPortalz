@@ -12,6 +12,7 @@ namespace cowsins2D
 
         [SerializeField] private float creationCooldown = 1f;
         [SerializeField] private int maxPortals = 2;
+        [SerializeField] private float range = 20f;
         [SerializeField] private LayerMask groundLayer;
         private UIController UIController;
         private PlayerDependencies playerDependencies;
@@ -83,6 +84,10 @@ namespace cowsins2D
 
         private bool IsValidPosition(Vector2 position)
         {
+            if (Vector2.Distance(playerDependencies.gameObject.transform.position, position) > range)
+            {
+                return false;
+            }
             return Physics2D.OverlapCircle(position, 0.2f, groundLayer) == false;
         }
 
