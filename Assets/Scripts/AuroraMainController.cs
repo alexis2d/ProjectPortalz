@@ -15,6 +15,7 @@ namespace cowsins2D
             playerDependencies = GetComponent<PlayerDependencies>();
             player = playerDependencies.PlayerMovement;
             player.PlayerMovementEvents.onTurn.AddListener(ChangeOrientation);
+            ChangeOrientation();
         }
 
         private void ChangeOrientation()
