@@ -23,7 +23,7 @@ namespace cowsins2D
 
         private void Start()
         {
-            playerDependencies = FindObjectOfType<PlayerDependencies>();
+            playerDependencies = FindAnyObjectByType<PlayerDependencies>();
             UIController = playerDependencies._UIController;
         }
 
