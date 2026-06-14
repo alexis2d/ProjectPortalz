@@ -8,8 +8,6 @@ namespace cowsins2D
     {
         protected override void ChangeAnimationState(string newState)
         {
-            Debug.Log(currentState);
-            Debug.Log(newState);
             if (currentState == newState) return;
 
             if(!String.IsNullOrEmpty(currentState)) animator?.ResetTrigger(currentState);

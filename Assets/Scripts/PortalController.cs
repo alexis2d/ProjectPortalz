@@ -14,6 +14,7 @@ namespace cowsins2D
         [SerializeField] private int maxPortals = 2;
         [SerializeField] private float range = 20f;
         [SerializeField] private LayerMask groundLayer;
+        [SerializeField] private float slowMotion = 0.5f;
         private UIController UIController;
         private PlayerDependencies playerDependencies;
 
@@ -32,6 +33,13 @@ namespace cowsins2D
             AutomaticRemoval();
             if (InputManager.PlayerInputs.Shoot && UIController.highlightedInventorySlot == null && UIController.currentInventorySlot == null) HandlePortalPlacement();
             if (InputManager.PlayerInputs.Reload && UIController.highlightedInventorySlot == null && UIController.currentInventorySlot == null) HandlePortalClearing();
+            if (InputManager.PlayerInputs.Aiming && UIController.highlightedInventorySlot == null && UIController.currentInventorySlot == null)
+            {
+                HandlePortalAim(true);
+            } else
+            {
+                HandlePortalAim(false);
+            }
         }
 
         private void AutomaticRemoval()
@@ -58,6 +66,17 @@ namespace cowsins2D
         private void HandlePortalClearing()
         {
             PortalManager.Instance.ClearPortals();
+        }
+
+        private void HandlePortalAim(bool aiming)
+        {
+            if (aiming)
+            {
+                Time.timeScale = slowMotion;
+            } else
+            {
+                Time.timeScale = 1f;
+            }
         }
 
         public void TryPlacePortal()

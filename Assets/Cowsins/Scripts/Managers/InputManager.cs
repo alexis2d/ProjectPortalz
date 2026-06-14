@@ -57,6 +57,7 @@ namespace cowsins2D
                 HorizontalMovement = inputActions.GameControls.Movement.ReadValue<float>(),
                 VerticalMovement = -inputActions.GameControls.VerticalMovement.ReadValue<float>(),
                 AimDirection = inputActions.GameControls.Aiming.ReadValue<Vector2>(),
+                Aiming = inputActions.GameControls.Aim.IsPressed(), // OVERRIDE
                 Crouch = inputActions.GameControls.Crouch.IsPressed(),
                 JumpingDown = inputActions.GameControls.Jumping.WasPressedThisFrame(),
                 JumpingUp = inputActions.GameControls.Jumping.WasReleasedThisFrame(),

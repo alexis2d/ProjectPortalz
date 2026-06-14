@@ -1,4 +1,5 @@
 {
+    "version": 1,
     "name": "PlayerActions",
     "maps": [
         {
@@ -9,7 +10,7 @@
                     "name": "Movement",
                     "type": "Button",
                     "id": "0059f214-490b-4648-a1f1-9acd1d4d3619",
-                    "expectedControlType": "Button",
+                    "expectedControlType": "",
                     "processors": "",
                     "interactions": "",
                     "initialStateCheck": false
@@ -199,6 +200,15 @@
                     "type": "Button",
                     "id": "bc821f27-2a05-4324-a8d5-d78b1a53bbe4",
                     "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                },
+                {
+                    "name": "Aim",
+                    "type": "Button",
+                    "id": "818c0fce-f796-4f3a-89f1-5e2f31c1836f",
+                    "expectedControlType": "",
                     "processors": "",
                     "interactions": "",
                     "initialStateCheck": false
@@ -862,6 +872,28 @@
                     "processors": "",
                     "groups": "",
                     "action": "UseInventory",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "db8601dd-e2ba-4a0e-9794-2409a8e8a543",
+                    "path": "<Mouse>/rightButton",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": ";Keyboard",
+                    "action": "Aim",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "0fbe08c6-042c-4cf7-abcb-11eb291d056b",
+                    "path": "<Gamepad>/leftTrigger",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": ";Controller",
+                    "action": "Aim",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }

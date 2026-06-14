@@ -7,6 +7,7 @@ namespace cowsins2D
         public float HorizontalMovement;
         public float VerticalMovement;
         public Vector2 AimDirection;
+        public bool Aiming; // OVERRIDE
         public bool Crouch;
         public bool Jump;
         public bool Gliding;

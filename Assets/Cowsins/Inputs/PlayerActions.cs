@@ -96,7 +96,7 @@ public partial class @PlayerActions: IInputActionCollection2, IDisposable
                     ""name"": ""Movement"",
                     ""type"": ""Button"",
                     ""id"": ""0059f214-490b-4648-a1f1-9acd1d4d3619"",
-                    ""expectedControlType"": ""Button"",
+                    ""expectedControlType"": """",
                     ""processors"": """",
                     ""interactions"": """",
                     ""initialStateCheck"": false
@@ -286,6 +286,15 @@ public partial class @PlayerActions: IInputActionCollection2, IDisposable
                     ""type"": ""Button"",
                     ""id"": ""bc821f27-2a05-4324-a8d5-d78b1a53bbe4"",
                     ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""Aim"",
+                    ""type"": ""Button"",
+                    ""id"": ""818c0fce-f796-4f3a-89f1-5e2f31c1836f"",
+                    ""expectedControlType"": """",
                     ""processors"": """",
                     ""interactions"": """",
                     ""initialStateCheck"": false
@@ -951,6 +960,28 @@ public partial class @PlayerActions: IInputActionCollection2, IDisposable
                     ""action"": ""UseInventory"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""db8601dd-e2ba-4a0e-9794-2409a8e8a543"",
+                    ""path"": ""<Mouse>/rightButton"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": "";Keyboard"",
+                    ""action"": ""Aim"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""0fbe08c6-042c-4cf7-abcb-11eb291d056b"",
+                    ""path"": ""<Gamepad>/leftTrigger"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": "";Controller"",
+                    ""action"": ""Aim"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
                 }
             ]
         }
@@ -992,6 +1023,7 @@ public partial class @PlayerActions: IInputActionCollection2, IDisposable
         m_GameControls_UISelect = m_GameControls.FindAction("UISelect", throwIfNotFound: true);
         m_GameControls_DropInventory = m_GameControls.FindAction("DropInventory", throwIfNotFound: true);
         m_GameControls_UseInventory = m_GameControls.FindAction("UseInventory", throwIfNotFound: true);
+        m_GameControls_Aim = m_GameControls.FindAction("Aim", throwIfNotFound: true);
     }
 
     ~@PlayerActions()
@@ -1094,6 +1126,7 @@ public partial class @PlayerActions: IInputActionCollection2, IDisposable
     private readonly InputAction m_GameControls_UISelect;
     private readonly InputAction m_GameControls_DropInventory;
     private readonly InputAction m_GameControls_UseInventory;
+    private readonly InputAction m_GameControls_Aim;
     /// <summary>
     /// Provides access to input actions defined in input action map "GameControls".
     /// </summary>
@@ -1194,6 +1227,10 @@ public partial class @PlayerActions: IInputActionCollection2, IDisposable
         /// </summary>
         public InputAction @UseInventory => m_Wrapper.m_GameControls_UseInventory;
         /// <summary>
+        /// Provides access to the underlying input action "GameControls/Aim".
+        /// </summary>
+        public InputAction @Aim => m_Wrapper.m_GameControls_Aim;
+        /// <summary>
         /// Provides access to the underlying input action map instance.
         /// </summary>
         public InputActionMap Get() { return m_Wrapper.m_GameControls; }
@@ -1285,6 +1322,9 @@ public partial class @PlayerActions: IInputActionCollection2, IDisposable
             @UseInventory.started += instance.OnUseInventory;
             @UseInventory.performed += instance.OnUseInventory;
             @UseInventory.canceled += instance.OnUseInventory;
+            @Aim.started += instance.OnAim;
+            @Aim.performed += instance.OnAim;
+            @Aim.canceled += instance.OnAim;
         }
 
         /// <summary>
@@ -1362,6 +1402,9 @@ public partial class @PlayerActions: IInputActionCollection2, IDisposable
             @UseInventory.started -= instance.OnUseInventory;
             @UseInventory.performed -= instance.OnUseInventory;
             @UseInventory.canceled -= instance.OnUseInventory;
+            @Aim.started -= instance.OnAim;
+            @Aim.performed -= instance.OnAim;
+            @Aim.canceled -= instance.OnAim;
         }
 
         /// <summary>
@@ -1582,5 +1625,12 @@ public partial class @PlayerActions: IInputActionCollection2, IDisposable
         /// <seealso cref="UnityEngine.InputSystem.InputAction.performed" />
         /// <seealso cref="UnityEngine.InputSystem.InputAction.canceled" />
         void OnUseInventory(InputAction.CallbackContext context);
+        /// <summary>
+        /// Method invoked when associated input action "Aim" is either <see cref="UnityEngine.InputSystem.InputAction.started" />, <see cref="UnityEngine.InputSystem.InputAction.performed" /> or <see cref="UnityEngine.InputSystem.InputAction.canceled" />.
+        /// </summary>
+        /// <seealso cref="UnityEngine.InputSystem.InputAction.started" />
+        /// <seealso cref="UnityEngine.InputSystem.InputAction.performed" />
+        /// <seealso cref="UnityEngine.InputSystem.InputAction.canceled" />
+        void OnAim(InputAction.CallbackContext context);
     }
 }
