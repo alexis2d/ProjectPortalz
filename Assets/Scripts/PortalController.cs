@@ -72,9 +72,11 @@ namespace cowsins2D
         {
             if (aiming)
             {
+                Crosshair.Instance.Show();
                 Time.timeScale = slowMotion;
             } else
             {
+                Crosshair.Instance.Hide(false);
                 Time.timeScale = 1f;
             }
         }
