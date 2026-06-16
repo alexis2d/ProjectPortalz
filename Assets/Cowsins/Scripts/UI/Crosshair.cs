@@ -1,4 +1,5 @@
 using UnityEngine;
+using UnityEngine.InputSystem;
 
 namespace cowsins2D
 {
@@ -8,7 +9,7 @@ namespace cowsins2D
 
         [SerializeField, Tooltip("If the player does not own a weapon, set to true if you want the crosshair to still be visible.")] private bool showCrosshairIfWeaponIsNull;
 
-        [SerializeField, Tooltip("Spread that the crosshair will lerp to (“idle spread”)")] private float defaultSpread, resizeSpeed;
+        [SerializeField, Tooltip("Spread that the crosshair will lerp to (ï¿½idle spreadï¿½)")] private float defaultSpread, resizeSpeed;
 
         [SerializeField, Tooltip("Width of each line of the crosshair")] private float defaultWidth;
 
@@ -58,7 +59,17 @@ namespace cowsins2D
             texture.Apply();
 
             Vector2 mousePosition = Event.current.mousePosition;
-
+            
+            // OVERRIDE
+            if (hidden)
+            {
+                mousePosition = new Vector2(
+                    Screen.width / 2f,
+                    Screen.height / 2f
+                );
+            }
+            // OVERRIDE
+            
             // RIGHT
             GUI.DrawTexture(new Rect(mousePosition.x + spread, mousePosition.y - defaultHeight / 2, defaultWidth, defaultHeight), texture);
             // LEFT

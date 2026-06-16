@@ -31,7 +31,7 @@ namespace cowsins2D
         private void Update()
         {
             AutomaticRemoval();
-            if (InputManager.PlayerInputs.Shoot && UIController.highlightedInventorySlot == null && UIController.currentInventorySlot == null) HandlePortalPlacement();
+            if (InputManager.PlayerInputs.Shoot && InputManager.PlayerInputs.Aiming && UIController.highlightedInventorySlot == null && UIController.currentInventorySlot == null) HandlePortalPlacement();
             if (InputManager.PlayerInputs.Reload && UIController.highlightedInventorySlot == null && UIController.currentInventorySlot == null) HandlePortalClearing();
             if (InputManager.PlayerInputs.Aiming && UIController.highlightedInventorySlot == null && UIController.currentInventorySlot == null)
             {
@@ -72,10 +72,12 @@ namespace cowsins2D
         {
             if (aiming)
             {
+                Cursor.lockState = CursorLockMode.None;
                 Crosshair.Instance.Show();
                 Time.timeScale = slowMotion;
             } else
             {
+                Cursor.lockState = CursorLockMode.Locked;
                 Crosshair.Instance.Hide(false);
                 Time.timeScale = 1f;
             }
