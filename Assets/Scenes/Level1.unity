@@ -7576,13 +7576,14 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::cowsins2D.PortalController
   portalPrefab: {fileID: 884062558}
   portalsParent: {fileID: 959045903}
-  creationCooldown: 0.1
+  creationCooldown: 1
   maxPortals: 2
   range: 20
   groundLayer:
     serializedVersion: 2
     m_Bits: 8
-  slowMotion: 0.3
+  slowMotionForce: 0.5
+  slowMotionMaxDuration: 3
   OnPortalPlaced:
     m_PersistentCalls:
       m_Calls: []

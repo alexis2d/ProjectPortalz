@@ -9,29 +9,31 @@ namespace cowsins2D
     {
         [SerializeField] private Portal portalPrefab;
         [SerializeField] private Transform portalsParent;
-
-        [SerializeField] private float creationCooldown = 1f;
         [SerializeField] private int maxPortals = 2;
         [SerializeField] private float range = 20f;
         [SerializeField] private LayerMask groundLayer;
-        [SerializeField] private float slowMotion = 0.5f;
+        [SerializeField] private float slowMotionForce = 0.5f;
+        [SerializeField] private float aimingMaxDuration = 3f;
+        [SerializeField] private float aimingCooldown = 2f;
         private UIController UIController;
         private PlayerDependencies playerDependencies;
-
         public UnityEvent OnPortalPlaced;
-
-        private DateTime lastCreation;
+        private DateTime lastAimingStart;
+        private DateTime lastAimingEnd;
+        private bool aiming = false;
 
         private void Start()
         {
             playerDependencies = FindAnyObjectByType<PlayerDependencies>();
             UIController = playerDependencies._UIController;
+            lastAimingStart = DateTime.Now - TimeSpan.FromSeconds(aimingMaxDuration);
+            lastAimingEnd = DateTime.Now - TimeSpan.FromSeconds(aimingCooldown);
         }
 
         private void Update()
         {
             AutomaticRemoval();
-            if (InputManager.PlayerInputs.Shoot && InputManager.PlayerInputs.Aiming && UIController.highlightedInventorySlot == null && UIController.currentInventorySlot == null) HandlePortalPlacement();
+            if (InputManager.PlayerInputs.Shoot && aiming && UIController.highlightedInventorySlot == null && UIController.currentInventorySlot == null) HandlePortalPlacement();
             if (InputManager.PlayerInputs.Reload && UIController.highlightedInventorySlot == null && UIController.currentInventorySlot == null) HandlePortalClearing();
             if (InputManager.PlayerInputs.Aiming && UIController.highlightedInventorySlot == null && UIController.currentInventorySlot == null)
             {
@@ -68,15 +70,35 @@ namespace cowsins2D
             PortalManager.Instance.ClearPortals();
         }
 
-        private void HandlePortalAim(bool aiming)
+        private void HandlePortalAim(bool tryAiming)
         {
-            if (aiming)
+            bool canAim = true;
+            if (tryAiming && aiming && DateTime.Now - lastAimingStart > TimeSpan.FromSeconds(aimingMaxDuration))
             {
+                canAim = false;
+            }
+            if (tryAiming && DateTime.Now - lastAimingEnd < TimeSpan.FromSeconds(aimingCooldown))
+            {
+                canAim = false;
+            }
+            
+            if (tryAiming && canAim)
+            {
+                if (aiming == false)
+                {
+                    lastAimingStart = DateTime.Now;
+                }
+                aiming = true;
                 Cursor.lockState = CursorLockMode.None;
                 Crosshair.Instance.Show();
-                Time.timeScale = slowMotion;
+                Time.timeScale = slowMotionForce;
             } else
             {
+                if (aiming)
+                {
+                    lastAimingEnd = DateTime.Now;
+                }
+                aiming = false;
                 Cursor.lockState = CursorLockMode.Locked;
                 Crosshair.Instance.Hide(false);
                 Time.timeScale = 1f;
@@ -85,11 +107,6 @@ namespace cowsins2D
 
         public void TryPlacePortal()
         {
-            if (DateTime.Now - lastCreation < TimeSpan.FromSeconds(creationCooldown))
-            {
-                return;
-            }
-
             Vector2 screenPos = InputManager.PlayerInputs.MousePos;
             Vector2 worldPos = Camera.main.ScreenToWorldPoint(screenPos);
             if (IsValidPosition(worldPos) == false)
@@ -121,7 +138,6 @@ namespace cowsins2D
             portal.transform.SetParent(portalsParent);
             portal.SetCreationTime(DateTime.Now);
             PortalManager.Instance.AddPortal(portal);
-            lastCreation = portal.GetCreationTime();
 
             OnPortalPlaced?.Invoke();
         }
