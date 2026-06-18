@@ -54,9 +54,14 @@ namespace cowsins2D
                     portalsToRemove.Add(portal);
                 }
             }
+            int portalsToRemoveCount = portalsToRemove.Count;
             foreach (var portal in portalsToRemove)
             {
                 PortalManager.Instance.RemovePortal(portal);
+            }
+            if (portalsToRemoveCount > 0)
+            {
+                PortalManager.Instance.ClearPortals();
             }
         }
 
