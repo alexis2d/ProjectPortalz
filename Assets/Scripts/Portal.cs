@@ -1,4 +1,5 @@
 using System;
+using System.Collections;
 using UnityEngine;
 
 namespace cowsins2D
@@ -8,6 +9,8 @@ namespace cowsins2D
         [SerializeField] private float usageCooldown = 2f;
         [SerializeField] private float lifetime = 20f;
         [SerializeField] private float distanceBeforeDestruction = 50f;
+        [SerializeField] private float teleportSpeedBoost = 2f;
+        [SerializeField] private float maxSpeedModifier = 10f;
         private DateTime lastUsage;
         private DateTime creationTime;
 
@@ -57,6 +60,12 @@ namespace cowsins2D
             {
                 target.transform.position = exitPortal.transform.position;
                 exitPortal.lastUsage = DateTime.Now;
+                
+                PlayerMultipliers multipliers = target.GetComponent<PlayerMultipliers>();
+                if (multipliers != null && multipliers.speedModifier < maxSpeedModifier)
+                {
+                    multipliers.speedModifier += teleportSpeedBoost;
+                }
             }
         }
 

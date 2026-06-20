@@ -7576,14 +7576,14 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::cowsins2D.PortalController
   portalPrefab: {fileID: 884062558}
   portalsParent: {fileID: 959045903}
-  creationCooldown: 1
   maxPortals: 2
   range: 20
   groundLayer:
     serializedVersion: 2
     m_Bits: 8
   slowMotionForce: 0.5
-  slowMotionMaxDuration: 3
+  aimingMaxDuration: 3
+  aimingCooldown: 2
   OnPortalPlaced:
     m_PersistentCalls:
       m_Calls: []
@@ -7738,6 +7738,18 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7896126667775258463, guid: 2a79600bfc1ac6d4dae3380726e3641c, type: 3}
       propertyPath: lifetime
+      value: 10
+      objectReference: {fileID: 0}
+    - target: {fileID: 7896126667775258463, guid: 2a79600bfc1ac6d4dae3380726e3641c, type: 3}
+      propertyPath: maxSpeedModifier
+      value: 2.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 7896126667775258463, guid: 2a79600bfc1ac6d4dae3380726e3641c, type: 3}
+      propertyPath: teleportSpeedBoost
+      value: 0.2
+      objectReference: {fileID: 0}
+    - target: {fileID: 7896126667775258463, guid: 2a79600bfc1ac6d4dae3380726e3641c, type: 3}
+      propertyPath: distanceBeforeDestruction
       value: 20
       objectReference: {fileID: 0}
     m_RemovedComponents: []
