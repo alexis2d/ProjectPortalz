@@ -19,6 +19,7 @@ namespace cowsins2D
             player.PlayerMovementEvents.onTurn.AddListener(ChangeOrientation);
             multipliers = GetComponent<PlayerMultipliers>();
             player.PlayerMovementEvents.onIdle.AddListener(ResetSpeedModifier);
+            player.PlayerMovementEvents.onTurn.AddListener(ResetSpeedModifier);
             ChangeOrientation();
         }
 
@@ -43,6 +44,7 @@ namespace cowsins2D
         {
             player.PlayerMovementEvents.onTurn.RemoveListener(ChangeOrientation);
             player.PlayerMovementEvents.onIdle.RemoveListener(ResetSpeedModifier);
+            player.PlayerMovementEvents.onTurn.AddListener(ResetSpeedModifier);
         }
 
     }
