@@ -12,15 +12,16 @@ namespace cowsins2D
     {
         [SerializeField] private Image concentrationUI;
         [SerializeField] private float lerpBarValueSpeed;
-        [SerializeField] private AuroraDependencies auroraDependencies;
         [SerializeField] private TextMeshProUGUI concentrationText;
         private float targetConcentrationValue;
+        private AuroraDependencies auroraDependencies;
         private AuroraStats auroraStats;
         public delegate void OnUpdateConcentration(float concentration);
         public OnUpdateConcentration onUpdateConcentration;
 
         private void Start()
         {
+            auroraDependencies = FindAnyObjectByType<AuroraDependencies>();
             auroraStats = auroraDependencies.AuroraStats;
             if (concentrationText != null) Destroy(concentrationText.gameObject);
             onUpdateConcentration = BarConcentration;
@@ -30,7 +31,6 @@ namespace cowsins2D
         {
             if (concentrationUI != null)
             {
-                // Lerp the shield UI fill amount towards the target shield value
                 concentrationUI.fillAmount = Mathf.Lerp(concentrationUI.fillAmount, targetConcentrationValue / auroraStats.MaxConcentration, lerpBarValueSpeed * Time.deltaTime);
             }
         }

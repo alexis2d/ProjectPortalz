@@ -7279,7 +7279,7 @@ RectTransform:
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
   m_AnchoredPosition: {x: 35, y: 50}
-  m_SizeDelta: {x: 115, y: 17}
+  m_SizeDelta: {x: 200, y: 17}
   m_Pivot: {x: 0, y: 0}
 --- !u!114 &692519455
 MonoBehaviour:
@@ -7758,9 +7758,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c473716fad144944ba2393303bb05697, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::cowsins2D.AuroraUIController
-  concentrationUI: {fileID: 692519456}
+  concentrationUI: {fileID: 527013758}
   lerpBarValueSpeed: 5
-  auroraDependencies: {fileID: 2017071131}
   concentrationText: {fileID: 161084600}
 --- !u!1 &1207901448
 GameObject:
@@ -7913,8 +7912,7 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 8
   slowMotionForce: 0.5
-  aimingMaxDuration: 3
-  aimingCooldown: 2
+  aimingCooldown: 3
   OnPortalPlaced:
     m_PersistentCalls:
       m_Calls: []
@@ -9128,7 +9126,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::cowsins2D.AuroraStats
   concentration: 0
-  maxConcentration: 10
+  maxConcentration: 5
 --- !u!114 &2017071131
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -9142,6 +9140,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::cowsins2D.AuroraDependencies
   AuroraUIController: {fileID: 1199693170}
+  PortalController: {fileID: 0}
 --- !u!1001 &2034991950
 PrefabInstance:
   m_ObjectHideFlags: 0

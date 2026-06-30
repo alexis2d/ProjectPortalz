@@ -6,7 +6,9 @@ namespace cowsins2D
     public class AuroraDependencies : MonoBehaviour
     {
         [SerializeField] private AuroraUIController AuroraUIController;
+        [SerializeField] private PortalController PortalController;
         public AuroraUIController _AuroraUIController => AuroraUIController;
+        public PortalController _PortalController => PortalController;
         public AuroraStats AuroraStats { get; private set; }
 
         private void Awake()

@@ -13,19 +13,26 @@ namespace cowsins2D
         [SerializeField] private float range = 20f;
         [SerializeField] private LayerMask groundLayer;
         [SerializeField] private float slowMotionForce = 0.5f;
-        [SerializeField] private float aimingMaxDuration = 3f;
         [SerializeField] private float aimingCooldown = 2f;
+        private float usedConcentration = 0;
         private UIController UIController;
         private PlayerDependencies playerDependencies;
+        private AuroraDependencies auroraDependencies;
+        private AuroraStats auroraStats;
         public UnityEvent OnPortalPlaced;
+        private float aimingMaxDuration;
         private DateTime lastAimingStart;
         private DateTime lastAimingEnd;
         private bool aiming = false;
+        public bool Aiming => aiming;
 
         private void Start()
         {
             playerDependencies = FindAnyObjectByType<PlayerDependencies>();
+            auroraDependencies = FindAnyObjectByType<AuroraDependencies>();
+            auroraStats = auroraDependencies.AuroraStats;
             UIController = playerDependencies._UIController;
+            aimingMaxDuration = auroraStats.MaxConcentration;
             lastAimingStart = DateTime.Now - TimeSpan.FromSeconds(aimingMaxDuration);
             lastAimingEnd = DateTime.Now - TimeSpan.FromSeconds(aimingCooldown);
         }
@@ -77,15 +84,7 @@ namespace cowsins2D
 
         private void HandlePortalAim(bool tryAiming)
         {
-            bool canAim = true;
-            if (tryAiming && aiming && DateTime.Now - lastAimingStart > TimeSpan.FromSeconds(aimingMaxDuration))
-            {
-                canAim = false;
-            }
-            if (tryAiming && DateTime.Now - lastAimingEnd < TimeSpan.FromSeconds(aimingCooldown))
-            {
-                canAim = false;
-            }
+            bool canAim = auroraStats.Concentration > 0;
             
             if (tryAiming && canAim)
             {
@@ -93,6 +92,8 @@ namespace cowsins2D
                 {
                     lastAimingStart = DateTime.Now;
                 }
+                usedConcentration = (float)(DateTime.Now - lastAimingStart).TotalSeconds;
+                auroraStats.UpdateConcentration(usedConcentration);
                 aiming = true;
                 Cursor.lockState = CursorLockMode.None;
                 Crosshair.Instance.Show();
@@ -102,6 +103,11 @@ namespace cowsins2D
                 if (aiming)
                 {
                     lastAimingEnd = DateTime.Now;
+                    auroraStats.UpdateLockedConcentration();
+                }
+                if (DateTime.Now - lastAimingEnd > TimeSpan.FromSeconds(aimingCooldown))
+                {
+                    auroraStats.ResetConcentration();
                 }
                 aiming = false;
                 Cursor.lockState = CursorLockMode.Locked;
