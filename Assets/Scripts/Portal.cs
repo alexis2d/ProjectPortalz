@@ -11,6 +11,10 @@ namespace cowsins2D
         [SerializeField] private float distanceBeforeDestruction = 50f;
         [SerializeField] private float teleportSpeedBoost = 2f;
         [SerializeField] private float maxSpeedModifier = 10f;
+        [SerializeField] private float teleportVerticalSpeedBoost = 1.5f;
+        [SerializeField] private float baseTeleportVerticalSpeedBoost = 3f;
+        [SerializeField] private float maxVerticalExitSpeed = 25f;
+        [SerializeField] private float verticalDeadzone = 0.2f;
         private DateTime lastUsage;
         private DateTime creationTime;
 
@@ -60,13 +64,38 @@ namespace cowsins2D
             {
                 target.transform.position = exitPortal.transform.position;
                 exitPortal.lastUsage = DateTime.Now;
-                
+
+                ResetMovementStateOnTeleport(target);
+
                 PlayerMultipliers multipliers = target.GetComponent<PlayerMultipliers>();
                 if (multipliers != null && multipliers.speedModifier < maxSpeedModifier)
                 {
                     multipliers.speedModifier += teleportSpeedBoost;
                 }
             }
+        }
+
+        private void ResetMovementStateOnTeleport(GameObject target)
+        {
+            PlayerMovement playerMovement = target.GetComponent<PlayerMovement>();
+            if (playerMovement == null) return;
+
+            playerMovement.PrepareForTeleport(GetExitVerticalVelocity(playerMovement));
+
+            PlayerStates playerStates = target.GetComponent<PlayerStates>();
+            if (playerStates != null && playerStates._States != null)
+            {
+                playerStates.ForceChangeState(playerStates._States.Default());
+            }
+        }
+
+        private float GetExitVerticalVelocity(PlayerMovement playerMovement)
+        {
+            float entrySpeed = Mathf.Abs(playerMovement.Velocity.y);
+            if (entrySpeed < verticalDeadzone) entrySpeed = 0f;
+
+            float momentumBonus = entrySpeed * teleportVerticalSpeedBoost;
+            return Mathf.Min(Mathf.Max(baseTeleportVerticalSpeedBoost, momentumBonus), maxVerticalExitSpeed);
         }
 
         public void Destroy()

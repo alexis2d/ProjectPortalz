@@ -8078,8 +8078,24 @@ PrefabInstance:
       value: 0.2
       objectReference: {fileID: 0}
     - target: {fileID: 7896126667775258463, guid: 2a79600bfc1ac6d4dae3380726e3641c, type: 3}
+      propertyPath: maxVerticalExitSpeed
+      value: 50
+      objectReference: {fileID: 0}
+    - target: {fileID: 7896126667775258463, guid: 2a79600bfc1ac6d4dae3380726e3641c, type: 3}
+      propertyPath: baseVerticalExitBoost
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 7896126667775258463, guid: 2a79600bfc1ac6d4dae3380726e3641c, type: 3}
       propertyPath: distanceBeforeDestruction
       value: 20
+      objectReference: {fileID: 0}
+    - target: {fileID: 7896126667775258463, guid: 2a79600bfc1ac6d4dae3380726e3641c, type: 3}
+      propertyPath: teleportVerticalSpeedBoost
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 7896126667775258463, guid: 2a79600bfc1ac6d4dae3380726e3641c, type: 3}
+      propertyPath: baseTeleportVerticalSpeedBoost
+      value: 10
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []

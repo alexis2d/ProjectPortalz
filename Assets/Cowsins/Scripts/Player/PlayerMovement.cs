@@ -189,6 +189,9 @@ namespace cowsins2D
         private float wallJumpControlTimer;
         private float wallJumpGraceTimer;
 
+        private const float teleportGraceDuration = 0.15f;
+        private float teleportGraceTimer;
+
         [Header("OTHERS")]
         [Tooltip("Maximum height allowed for a surface to be allowed as a step.")] [SerializeField] private float stepHeight;
 
@@ -443,7 +446,12 @@ namespace cowsins2D
             {
                 wallJumpControlTimer -= deltaTime;
             }
-            
+
+            if (teleportGraceTimer > 0)
+            {
+                teleportGraceTimer -= deltaTime;
+            }
+
             // Wall jump grace time (wall coyote )
             if (!LastOnWallTime && wallJumpGraceTimer > 0)
             {
@@ -574,7 +582,7 @@ namespace cowsins2D
         private void PreventUnvoluntarySliding()
         {
             // Removes gravity when grounded and idle on a slope to prevent sliding down.
-            if (groundAngle < maxFloorAngle && IsGrounded && InputManager.PlayerInputs.HorizontalMovement == 0 && !isJumping && !isDashing && !ladderAvailable)
+            if (groundAngle < maxFloorAngle && IsGrounded && InputManager.PlayerInputs.HorizontalMovement == 0 && !isJumping && !isDashing && !ladderAvailable && teleportGraceTimer <= 0)
             {
                 rb.gravityScale = 0;
                 rb.linearVelocity = Vector2.zero;
@@ -637,6 +645,26 @@ namespace cowsins2D
         }
 
         public void StopWallJump() => isWallJumping = false;
+
+        public Vector2 Velocity => rb.linearVelocity;
+
+        public void PrepareForTeleport(float exitVerticalVelocity)
+        {
+            if (isDashing)
+            {
+                CancelInvoke(nameof(ResetDash));
+                ResetDash();
+            }
+
+            StopWallJump();
+            isJumping = false;
+            isJumpFalling = false;
+            isFalling = false;
+            teleportGraceTimer = teleportGraceDuration;
+
+            rb.linearVelocity = new Vector2(rb.linearVelocity.x, exitVerticalVelocity);
+        }
+
         public void CheckIfJumpingOrWallSliding()
         {
             if (IsGrounded && !isJumping && !isWallJumping)
